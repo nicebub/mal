@@ -1,0 +1,3 @@
+[submodule "impls/ltmal/peelo-prompt"]
+	path = impls/ltmal/peelo-prompt
+	url = https://github.com/peelonet/peelo-prompt.git
