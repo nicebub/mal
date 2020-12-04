@@ -4,18 +4,18 @@
 
 using namespace std;
 
-string READ(const string str){
+const string READ(const string str){
 	return str;
 }
 
-string EVAL(const string str){
+const string EVAL(const string str){
 	return str;
 }
 
-string PRINT(const string str){
+const string PRINT(const string str){
 	return str;
 }
-string rep(const string str){
+const string rep(const string str){
 	return PRINT(EVAL(READ(str)));
 }
 
