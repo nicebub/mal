@@ -91,7 +91,7 @@ DOCKERIZE =
 
 IMPLS = ada ada.2 awk bash basic bbc-basic c chuck clojure coffee common-lisp cpp crystal cs d dart \
 	elisp elixir elm erlang es6 factor fantom forth fsharp go groovy gnu-smalltalk \
-	guile haskell haxe hy io java js jq julia kotlin livescript logo lua make mal \
+	guile haskell haxe hy io java js jq julia kotlin livescript logo ltmal lua make mal \
 	matlab miniMAL nasm nim objc objpascal ocaml perl perl6 php picolisp pike plpgsql \
 	plsql powershell ps python python.2 r racket rexx rpython ruby rust scala scheme skew \
 	swift swift3 swift4 swift5 tcl ts vala vb vhdl vimscript wasm wren yorick xslt zig
@@ -225,6 +225,7 @@ julia_STEP_TO_PROG =         impls/julia/$($(1)).jl
 kotlin_STEP_TO_PROG =        impls/kotlin/$($(1)).jar
 livescript_STEP_TO_PROG =    impls/livescript/$($(1)).js
 logo_STEP_TO_PROG =          impls/logo/$($(1)).lg
+ltmal_STEP_TO_PROG =         impls/ltmal/$($(1)).lt
 lua_STEP_TO_PROG =           impls/lua/$($(1)).lua
 make_STEP_TO_PROG =          impls/make/$($(1)).mk
 mal_STEP_TO_PROG =           impls/mal/$($(1)).mal
