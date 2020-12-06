@@ -2,37 +2,17 @@
 #include <regex>
 #include <list>
 #include <iostream>
+#include "types.cpp"
+
 
 using namespace std;
 class Reader {
 	public:
-	
-	Reader(list<string> inTokens): 
-		position(0),
+		Reader(list<string> inTokens): position(0),
 		tokList{inTokens},
-		tokens{}, current{inTokens.begin()} {}
-	Reader(): position(0), tokens(),tokList{}, current{} {}
-	Reader(const std::list<string> iTokens,const std::regex reg): 
-			position(0),
-			tokList{}, current{} {
-		tokens = std::regex_token_iterator<std::string::const_iterator>(
-				iTokens.begin()->cbegin(),
-				iTokens.begin()->cend(),
-				reg,
-				0
-			);
-	}
-	Reader(const std::string iToken,const std::regex reg): 
-			position(0),
-			tokList{}, current{},
-			tokens{
-				iToken.cbegin(),
-				iToken.cend(),
-				reg,
-				0
-		}
-		{}
-	~Reader(){}
+		current{inTokens.begin()} {}
+		Reader(): position(0),tokList{}, current{} {}
+		~Reader(){}
 
 	std::string next(void){
 		list<string>::iterator end;
@@ -52,10 +32,39 @@ class Reader {
 		int position;
 		list<string> tokList;
 		list<string>::iterator current;
-		std::regex_token_iterator<std::string::const_iterator> tokens;
 };
 
-void read_form(Reader reader){}
+MalType read_form(Reader reader);
+
+list<MalType> read_list(Reader reader){
+	list<MalType> mlist{};
+	std::string result = reader.peek();
+	while(!result.empty() && *result.cbegin() != ')'){
+		mlist.emplace_back(read_form(reader));
+	}
+	if(result.empty()){/*error*/}
+	return mlist;
+}
+
+void read_atom(Reader reader){
+	
+}
+
+MalType read_form(Reader reader){
+	std::string result = reader.peek();
+	if(result.empty()){}
+	switch(*result.cbegin()){
+		case '(':
+			reader.next();
+			read_list(reader);
+			break;
+		default:
+			read_atom(reader);
+			break;
+	}
+	return MalType();
+}
+
 list<string> tokenize(std::string input, std::regex reg){
 	list<string> tokens{};
 	std::regex_token_iterator<std::string::const_iterator> tok_iter{
@@ -68,12 +77,12 @@ list<string> tokenize(std::string input, std::regex reg){
 	while(tok_iter != end){
 		std::string result = *tok_iter++;
 /*		cout << result << endl;*/
-		if(*result.cbegin()=='\"' && *result.cend() != '\"'){
+/*		if(*result.cbegin()=='\"' && *--result.cend() != '\"'){
 			cerr << "string not terminated with \"" << endl;
 		}
-		else{
+		else{*/
 			tokens.emplace_back(result);
-		}
+/*			}*/
 	}
 	return tokens;
 }

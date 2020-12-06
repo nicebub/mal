@@ -35,13 +35,7 @@ int main(){
 			prompt.set_history_max_size(std::atoi(value.c_str() + 11));
 		}
 		else{
-			Reader reader(value,reg);
-			std::string result = reader.next();
-			while(!result.empty()){
-				cout << rep(result) << endl;
-				result = reader.next();
-			}
-/*			cout << rep(value) << endl;*/
+			read_str(value,reg);
 		}
 		prompt.add_to_history(value);
 	}
